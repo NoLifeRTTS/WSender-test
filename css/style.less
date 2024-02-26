@@ -53,6 +53,7 @@ img {
 }
 @accent-color: rgba(31, 190, 165, 1);
 @accent-color-dark: rgba(13, 144, 124, 1);
+@accent-color-light: rgba(37, 211, 102, 1);
 @main-darkest-color: rgb(0, 0, 0);
 @main-dark-color: rgba(101, 101, 101, 1);
 @main-lightest-color: rgba(253, 253, 253, 1);
@@ -77,9 +78,31 @@ body {
     &__inner {
         max-width: 1220px;
         width: 100%;
+    }
+    &__content {
+        width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+    &__hidden {
+        position: relative;
+        transition: 0.3s all ease;
+        height: 0px;
+        overflow: hidden;
+        .header__buttons {
+            position: absolute;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        &.active {
+            overflow: visible;
+            padding-top: 47px;
+        }
     }
     &__buttons {
         display: flex;
@@ -87,6 +110,44 @@ body {
         column-gap: 36px;
         @media(max-width: 600px) {
             column-gap: 20px;
+        }
+        @media(max-width: 550px) {
+            display: none;
+        }
+    }
+    &__burger {
+        width: 25px;
+        display: none;
+        height: 18px;
+        position: relative;
+        .line {
+            width: 25px;
+            height: 2px;
+            background: #fff;
+            transition: 0.3s all ease;
+        }
+        .line-second,
+        .line-third {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        @media(max-width: 550px) {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        &.active {
+            .line-first, 
+            .line-fourth {
+                opacity: 0;
+            }
+            .line-second {
+            transform: translateY(-50%) rotate(45deg);
+            }
+            .line-third {
+            transform: translateY(-50%) rotate(-45deg);
+            }
         }
     }
     &__social {
@@ -96,6 +157,13 @@ body {
         column-gap: 12px;
         &-icon {
             height: 26px;
+            @media(max-width: 360px) {
+                height: 22px;
+                svg {
+                    width: 22px;
+                    height: 22px;
+                }
+            }
         }
     }
     @media(max-width: 1024px) {
@@ -103,6 +171,9 @@ body {
     }
     @media(max-width: 768px) {
         padding: 20px;
+    }
+    @media(max-width: 360px) {
+        padding: 10px 10px;
     }
 }
 .button-dark {
@@ -117,6 +188,13 @@ body {
     padding: 12px 24px;
     background: @accent-color-dark;
     border-radius: 5px;
+    @media(max-width: 550px) {
+        font-size: 14px;
+        padding: 8px 18px;
+    }
+    @media(max-width: 360px) {
+        padding: 8px 10px;
+    }
 }
 .button-lk {
     color: @main-lightest-color-opacity;
@@ -126,6 +204,10 @@ body {
     display: flex;
     justify-content: center;
     min-height: 100vh;
+    transition: 0.3s all ease;
+    &.active {
+        padding-top: 174px !important;
+    }
     &__inner {
         max-width: 1200px;
         width: 100%;
@@ -148,9 +230,16 @@ body {
         @media(max-width: 545px) {
             padding: 40px 20px 40px 20px;
         }
+        @media(max-width: 435px) {
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
     }
     &__logo {
         margin-bottom: 20px;
+        @media(max-width: 435px) {
+            margin-bottom: 10px;
+        }
     }
     &__title {
         margin-bottom: 16px;
@@ -164,7 +253,15 @@ body {
             color: @main-darkest-color;
             @media(max-width: 545px) {
                 font-size: 30px;
+                line-height: 36px;
             }
+            @media(max-width: 340px) {
+                font-size: 23px;
+                line-height: 30px;
+            }
+        }
+        @media(max-width: 340px) {
+            margin-bottom: 10px;
         }
     }
     &__subtitle {
@@ -177,6 +274,15 @@ body {
             letter-spacing: 0px;
             text-align: left;
             color: @main-dark-color;
+        }
+        @media(max-width: 435px) {
+            margin-bottom: 15px;
+        }
+        @media(max-width: 340px) {
+            margin-bottom: 10px;
+            p {
+                font-size: 13px;
+            }
         }
     }
     &__buttons {
@@ -208,6 +314,11 @@ body {
         &-google {
             background: #fff;
             color: @main-darkest-color;
+        }
+        @media(max-width: 435px) {
+            font-size: 12px;
+            padding-left: 14px;
+            padding-right: 14px;
         }
     }
     &__description {
@@ -248,6 +359,10 @@ body {
         @media(max-width: 600px) {
             margin-bottom: 20px;
         }
+        @media(max-width: 340px) {
+            flex-direction: column-reverse;
+            row-gap: 15px;
+        }
     }
     &__nav {
         padding-top: 20px;
@@ -262,6 +377,14 @@ body {
             letter-spacing: 0em;
             text-align: left;
             color: @main-light-color;
+        }
+        @media(max-width: 550px) {
+            column-gap: 20px;
+        }
+        @media(max-width: 520px) {
+            flex-direction: column-reverse;
+            row-gap: 20px;
+            align-items: center;
         }
     }
     &__link {
@@ -278,6 +401,136 @@ body {
     }
     @media(max-width: 768px) {
         padding: 24px 20px;
+    }
+}
+.modal-bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0.4;
+    z-index: 20;
+    display: none;
+}
+.modal {
+    position: fixed;
+    z-index: 21;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 552px;
+    width: 100%;
+    height: auto;
+    background: #fff;
+    border-radius: 10px;
+    display: none;
+    &__inner {
+        display: flex;
+        flex-direction: column;
+        padding: 48px 56px;
+        @media (max-width: 500px) {
+            padding: 30px 30px;
+        }
+    }
+    &__title {
+        margin-bottom: 8px;
+        h2 {
+            font-family: "SegoeUIBold", sans-serif;
+            font-size: 28px;
+            font-weight: 600;
+            line-height: 36px;
+            letter-spacing: 0em;
+            text-align: left;
+            color: @main-darkest-color;
+        }
+    }
+    &__subtitle {
+        margin-bottom: 36px;
+        p {
+            font-family: "SegoeUIRegular", sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 21px;
+            letter-spacing: 0px;
+            text-align: left;
+            color: @main-dark-color;
+        }
+        @media (max-width: 450px) {
+            margin-bottom: 20px;
+        }
+    }
+    &__input {
+        margin-bottom: 36px;
+        .input-name {
+            margin-bottom: 4px;
+            font-family: "SegoeUIRegular", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 20px;
+            letter-spacing: 0px;
+            color: @main-darkest-color;
+        }
+        .phone-call {
+            width: 100%;
+            padding: 13px 20px;
+            border: 1px solid rgba(217, 217, 217, 1);
+            border-radius: 5px;
+            font-family: "SegoeUIRegular", sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 21px;
+            letter-spacing: 0px;
+            text-align: left;
+            &::placeholder {
+                font-family: "SegoeUIRegular", sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 21px;
+                letter-spacing: 0px;
+                text-align: left;
+                color: @main-dark-color;
+            }
+        }
+        @media (max-width: 450px) {
+            margin-bottom: 20px;
+        }
+    }
+    &__buttons {
+        display: flex;
+        justify-content: space-between;
+        .modal-btn {
+            max-width: 208px;
+            width: 100%;
+            padding: 17px 42px;
+            border-radius: 5px;
+            font-family: "SegoeUIBold", sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 21px;
+            letter-spacing: 0em;
+            text-align: center;
+            text-transform: uppercase;
+            &.btn-call {
+                background: @accent-color-light;
+                color: @main-lightest-color;
+            }
+            &.btn-cansel {
+                background: #fff;
+                color: @accent-color-light;
+                border: 1px solid @accent-color-light;
+            }
+            @media (max-width: 450px) {
+                max-width: none;
+                padding-left: 0px;
+                padding-right: 0px;
+            }
+        }
+        @media (max-width: 590px) {
+            column-gap: 20px;
+        }
+    }
+    @media (max-width: 590px) {
+        max-width: 90%;
     }
 }
 
